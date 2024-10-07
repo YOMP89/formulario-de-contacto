@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Inscripción Didáctico</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+        h1 {
+            text-align: center;
+            color: #4a4a4a;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-top: 1rem;
+            color: #4a4a4a;
+        }
+        input, select {
+            padding: 0.5rem;
+            margin-top: 0.25rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            transition: border-color 0.3s ease;
+        }
+        input:focus, select:focus {
+            outline: none;
+            border-color: #4a90e2;
+        }
+        button {
+            margin-top: 1.5rem;
+            padding: 0.75rem;
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #3a7bc8;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background-color: #ddd;
+            border-radius: 5px;
+            margin-top: 1rem;
+            overflow: hidden;
+        }
+        .progress {
+            width: 0;
+            height: 100%;
+            background-color: #4caf50;
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Inscripción al Curso</h1>
+        <form id="inscripcionForm">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required>
+            
+            <label for="email">Correo Electrónico:</label>
+            <input type="email" id="email" name="email" required>
+            
+            <label for="edad">Edad:</label>
+            <input type="number" id="edad" name="edad" min="18" max="100" required>
+            
+            <label for="curso">Curso de Interés:</label>
+            <select id="curso" name="curso" required>
+                <option value="">Seleccione un curso</option>
+                <option value="html">HTML y CSS</option>
+                <option value="javascript">JavaScript</option>
+                <option value="python">Python</option>
+                <option value="react">React</option>
+            </select>
+            
+            <button type="submit">Inscribirse</button>
+        </form>
+        <div class="progress-bar">
+            <div class="progress" id="formProgress"></div>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('inscripcionForm');
+        const progressBar = document.getElementById('formProgress');
+        const formFields = form.elements;
+
+        function updateProgress() {
+            const totalFields = formFields.length - 1; // Exclude submit button
+            let filledFields = 0;
+
+            for (let i = 0; i < totalFields; i++) {
+                if (formFields[i].value.trim() !== '') {
+                    filledFields++;
+                }
+            }
+
+            const progress = (filledFields / totalFields) * 100;
+            progressBar.style.width = `${progress}%`;
+        }
+
+        for (let i = 0; i < formFields.length; i++) {
+            formFields[i].addEventListener('input', updateProgress);
+        }
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            if (form.checkValidity()) {
+                alert('¡Inscripción exitosa! Gracias por registrarte.');
+                form.reset();
+                progressBar.style.width = '0%';
+            } else {
+                alert('Por favor, completa todos los campos requeridos.');
+            }
+        });
+    </script>
+</body>
+</html>
