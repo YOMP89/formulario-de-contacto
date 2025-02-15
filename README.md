@@ -1,5 +1,7 @@
 # Proyecto: Formulario de Inscripción Didáctico y Llamativo
 
+![Visualización del proyecto](pantallazoProyecto.jpg)
+
 Este proyecto consiste en un formulario de inscripción web interactivo y atractivo, creado con HTML, CSS y JavaScript. El formulario está diseñado para ser fácil de usar, visualmente agradable y proporcionar una experiencia de usuario positiva.
 
 ## Características
